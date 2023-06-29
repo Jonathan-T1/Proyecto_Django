@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<h3> Editar Rol Usuario</h3>
+<div class="container m-5 p-5 ">
+
+    <form action="" method="post">
+        {% csrf_token %}
+            {{ form | crispy }}
+        <br>
+        <button class="button" title="Actualizar" type="submit"><i class="fa-solid fa-floppy-disk"></i>DONE</button>
+    </form>
+
+</div>
+
+{% endblock content %}

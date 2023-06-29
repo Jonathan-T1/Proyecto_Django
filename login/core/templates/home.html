@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Inicio</h3>
+    {% if request.user.is_authenticated %}
+    {% if user.is_profesor %}
+        <hr>
+        <h4>
+        Profesor    {{ user.username | upper }}, Bienvenido A LearningYOU 
+
+        </h4>
+    {% elif user.is_staff %}
+    <hr>
+        <h4>
+        ADMIN    {{ user.username | upper }}, Bienvenido A LearningYOU 
+        </h4>
+    {% else %}
+    <hr>
+        <h4>
+        ESTUDIANTE   {{ user.username | upper }}, Bienvenido A LearningYOU 
+        </h4>
+    {% endif %}
+    {% endif %}
+
+{% endblock %}

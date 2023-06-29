@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/base.css" type="text/css">
+    <title>LearningYOU</title>
+</head>
+<body>
+    <header>
+        <h2><a class="logo" href={% url 'products' %}>LearningYOU</a></h2>
+        <nav class="navigation">
+            <a href={% url 'home' %}>HOME</a>
+            {% if request.user.is_authenticated %}
+            {% if user.is_profesor %}
+                <a href="#">curses</a>
+                <a href={% url 'products' %}>LearningYOU</a>
+                <button class="button"><a href={% url 'exit' %}>Log out</a></button>
+            {% elif user.is_staff %}
+                <a href={% url 'verus' %}>Edit Users</a>
+                <a href={% url 'products' %}>LearningYOU</a>
+                <a href={% url 'register' %}>Sing Up Users</a>
+                <button class="button"><a href={% url 'exit' %}>Log out</a></button>
+            
+            {% elif user.is_Estudiante %}
+                <a href="#"> Comunidad</a>
+                <a href={% url 'products' %}>LearningYOU</a>
+                <button class="button"><a href={% url 'exit' %}>Log out</a></button>
+            {% else %}
+                <a href={% url 'verus' %}>Edit Users</a>
+                <a href={% url 'products' %}>LearningYOU</a>
+                <a href={% url 'register' %}>Sing Up Users</a>
+                <button class="button"><a href={% url 'exit' %}>Log out</a></button>
+            {% endif%}
+            {% else %}
+                <button class="button"><a href={% url 'login' %}>Login</a></button>
+            {% endif %}
+
+
+            {% block content %}{% endblock %}
+        </nav>
+    </header>
+</body>
+</html>

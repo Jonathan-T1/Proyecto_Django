@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Cantidad de usuarios registrados: {{user.count}}</h1>
+
+<table id="" class="table mt-5" >
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">CÉDULA</th>
+      <th scope="col">NOMBRE COMPLETO</th>
+      <th scope="col">NOMBRE DE USUARIO</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">FECHA DE REGISTRO</th>
+      <th scope="col">ROL</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">EDITAR USUARIO</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        {% for x in user %}
+        <td>{{x.id}}</td>
+        <td>{{ x.cedula }}</td>
+        <td>{{ x.first_name | upper }} {{ x.last_name | upper }}</td>
+        <td>{{ x.username}}</td>
+        <td>{{ x.email}}</td>
+        <td>{{ x.date_joined}}</td>
+
+        {% if x.is_staff %}
+        <td>Administrador</td>
+        {% elif x.is_profesor %}
+        <td>Profesor</td>
+        {% else %}
+        <td>Estudiante</td>
+        {% endif %}
+        {% if x.is_active%}
+        <td>Activo</td>
+        {% else %}
+        <td>Inactivo</td>
+        {% endif %}
+        <td><button class="button"><a href="{%  url 'edituser' x.id %}" title="Editar Users" class="btn btn-outline-success"><i class="fa-solid fa-user-pen"></i> Edit</a></button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
